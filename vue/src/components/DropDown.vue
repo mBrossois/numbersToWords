@@ -5,8 +5,8 @@
     </a>
 
       <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-      <li><span class="dropdown-item" :class="activeLanguage === 'EN' ? 'active' : ''" @click="setActiveLanguage('EN')">EN</span></li>
-      <li><span class="dropdown-item" :class="activeLanguage === 'NL' ? 'active':''" @click="setActiveLanguage('NL')">NL</span></li>
+      <li><a class="dropdown-item" :class="activeLanguage === 'EN' ? 'active' : ''" @click="setActiveLanguage('EN')">EN</a></li>
+      <li><a class="dropdown-item" :class="activeLanguage === 'NL' ? 'active':''" @click="setActiveLanguage('NL')">NL</a></li>
     </ul>
   </div>
 </template>
@@ -33,5 +33,6 @@ export default class DropDown extends Vue {
   position: fixed;
   right: 2em;
   top: 2em;
+  z-index: 100;
 }
 </style>

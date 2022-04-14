@@ -1,16 +1,6 @@
 import {connectWords, numberLanguageLibrary, orderToAmount} from "@/utils/number-language.library";
 import {Digit, EndWords, NumberToLanguage} from "@/types/number-to-language.types";
 
-
-// Fill up function, so every part contains 3 numbers
-function fillWithZero(amountOfZero: number): string {
-  let zeroAmount = ''
-  for (let i = 0; i < amountOfZero; i++) {
-    zeroAmount += '0'
-  }
-  return zeroAmount;
-}
-
 export function transformNumberToWord(numberInput: number, language: string): string {
   const library = numberLanguageLibrary(numberInput === 0)[language]
 
@@ -18,7 +8,6 @@ export function transformNumberToWord(numberInput: number, language: string): st
   const lengthOfNumbers = splitNumb.length - 1;
 
   let totalWord = ''
-
   splitNumb.forEach((numb: string, index: number) => {
     totalWord += getTotalWord(numb, library, language) + library.endWords[lengthOfNumbers - index as keyof EndWords];
   })
@@ -48,21 +37,38 @@ function splitNumber(numberInput: number): string[] {
 
 }
 
+// Fill up function, so every part contains 3 numbers
+function fillWithZero(amountOfZero: number): string {
+  let zeroAmount = ''
+  for (let i = 0; i < amountOfZero; i++) {
+    zeroAmount += '0'
+  }
+  return zeroAmount;
+}
+
 function getTotalWord(numb: string, library: NumberToLanguage, language: string): string {
   let word = '';
   let counter = 0
   const order = library.order.split('');
+
   for (let i = 0; i < order.length; i++) {
+
     if (i === 1 && library.exceptions[numb[1] + numb[2]]) {
+
       word += library.exceptions[numb[1] + numb[2]]
       return word
-    } else if (order[i] === 'c' && numb[i + 1] !== '0') {
+
+    } else if (order[i] === 'c' && numb[i-1] !== '0' && numb[i + 1] !== '0') {
+
       word += connectWords(word[word.length - 1])[language].and
-    } else {
+
+    } else if(order[i] !== 'c') {
+
       const posNumber = order[i]
       const libraryPart = library[posNumber as keyof NumberToLanguage] as Digit
       word += libraryPart[numb[orderToAmount[posNumber]] as keyof Digit]
       counter++;
+
     }
   }
   return word

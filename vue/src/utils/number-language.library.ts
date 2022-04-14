@@ -52,11 +52,16 @@ export const numberLanguageLibrary = (isZero: boolean): { [key: string]: NumberT
           '11': 'eleven',
           '12': 'twelve',
           '13': 'thirteen',
+          '14': 'fourteen',
           '15': 'fifteen',
+          '16': 'sixteen',
+          '17': 'seventeen',
+          '18': 'eighteen',
+          '19': 'nineteen',
         }
       },
     'NL': {
-      order: 'HScD',
+      order: 'HDcT',
       endWords: {
         0: '',
         1: 'duizend ',
@@ -104,7 +109,12 @@ export const numberLanguageLibrary = (isZero: boolean): { [key: string]: NumberT
         '11': 'elf',
         '12': 'twaalf',
         '13': 'dertien',
-        '14': 'veertien'
+        '14': 'veertien',
+        '15': 'vijftien',
+        '16': 'zestien',
+        '17': 'zeventien',
+        '18': 'achtien',
+        '19': 'negentien',
       }
     }
   }
@@ -113,7 +123,7 @@ export const numberLanguageLibrary = (isZero: boolean): { [key: string]: NumberT
 export const connectWords = (lastLetter: string): {[key: string]: ConnectWords} => {
   return {
     'NL': {
-      and: lastLetter === 'e' ?  'en' : 'ën',
+      and: lastLetter === 'e' ? 'ën' : 'en' ,
     },
     'EN': {
       and: 'and'
