@@ -6,6 +6,8 @@ export const numberLanguageLibrary = (isZero: boolean): { [key: string]: NumberT
     'EN':
       {
         order: 'HcTD',
+        min: 0,
+        ceiling: 1000000000000,
         endWords: {
           0: '',
           1: 'thousand ',
@@ -68,7 +70,8 @@ export const numberLanguageLibrary = (isZero: boolean): { [key: string]: NumberT
         2: 'miljoen ',
         3: 'biljoen ',
       },
-
+      min: 0,
+      ceiling: 1000000000000,
       D: {
         '1': 'een',
         '2': 'twee',

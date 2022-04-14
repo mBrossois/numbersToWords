@@ -10,7 +10,6 @@
 
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
-import {watch} from "vue";
 import {Prop} from "vue-property-decorator";
 import {transformNumberToWord} from "@/utils/transformNumbers";
 

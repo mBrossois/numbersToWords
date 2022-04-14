@@ -6,6 +6,8 @@ export interface NumberToLanguage {
   D: Digit
   T: Digit
   H: Digit
+  ceiling: number
+  min: number
   exceptions: {[key: string]: string}
 }
 

@@ -5,6 +5,12 @@ export function transformNumberToWord(numberInput: number, language: string): st
   // Get library based on language and see if the value is zero
   const library = numberLanguageLibrary(numberInput === 0)[language]
 
+  if(outsideBoundaries(library, numberInput)) {
+    return `Out of bounds, try to add a number that's bigger or equal to ${library.min} and smaller then ${library.ceiling}`
+  } else if(containsNoneNumber(numberInput)) {
+    return 'Only full numbers can be translated'
+  }
+
   // Splits the number in hundreds, since this has the same setup the whole time
   const splitNumb = splitNumber(numberInput);
   const lengthOfNumbers = splitNumb.length - 1;
@@ -16,6 +22,16 @@ export function transformNumberToWord(numberInput: number, language: string): st
     totalWord += getTotalWord(numb, library, language) + library.endWords[lengthOfNumbers - index as keyof EndWords];
   })
   return totalWord;
+}
+
+function containsNoneNumber(numberInput: number) {
+  const regex = /([^-1234567890])/g
+  return numberInput.toString().match(regex)
+}
+
+// Check if it's in the bounds set in the library
+function outsideBoundaries(library: NumberToLanguage, numberInput: number) {
+  return numberInput < library.min || numberInput >= library.ceiling
 }
 
 function splitNumber(numberInput: number): string[] {
