@@ -1,4 +1,6 @@
+// Setup for number to language in the library
 export interface NumberToLanguage {
+  // Order decides the order the number is supposed to translate in D = digit, T = ten, H = hundred, c = connector
   order: string
   endWords: EndWords
   D: Digit
@@ -11,6 +13,7 @@ export interface ConnectWords {
   and: string
 }
 
+// The words that come after an amount of hundred has been returned (thousand, million)
 export interface EndWords {
   0: string;
   1: string;
@@ -18,6 +21,7 @@ export interface EndWords {
   3: string;
 }
 
+// Setup for Digit/Ten/Hundred
 export interface Digit {
   '1': string
   '2': string

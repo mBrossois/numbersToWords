@@ -131,6 +131,7 @@ export const connectWords = (lastLetter: string): {[key: string]: ConnectWords} 
   }
 }
 
+// Is used to get the position of the number, which is supposed to be translated
 export const orderToAmount: {[key: string]: number} = {
   'H': 0,
   'T': 1,
