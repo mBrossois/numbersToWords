@@ -11,7 +11,7 @@
 <script lang="ts">
 import {Options, Vue} from "vue-class-component";
 import {Prop} from "vue-property-decorator";
-import {transformNumberToWord} from "@/utils/transformNumbers";
+import {transformNumberToWord} from "@/utils/transform-numbers";
 
 @Options({})
 export default class InputNumber extends Vue {

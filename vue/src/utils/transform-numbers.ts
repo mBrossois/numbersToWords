@@ -1,14 +1,14 @@
 import {connectWords, numberLanguageLibrary, orderToAmount} from "@/utils/number-language.library";
 import {Digit, EndWords, NumberToLanguage} from "@/types/number-to-language.types";
+import {getErrors} from "@/utils/errors.utils";
 
 export function transformNumberToWord(numberInput: number, language: string): string {
   // Get library based on language and see if the value is zero
   const library = numberLanguageLibrary(numberInput === 0)[language]
 
-  if(outsideBoundaries(library, numberInput)) {
-    return `Out of bounds, try to add a number that's bigger or equal to ${library.min} and smaller then ${library.ceiling}`
-  } else if(containsNoneNumber(numberInput)) {
-    return 'Only full numbers can be translated'
+  const errors = getErrors(numberInput, library)
+  if(errors) {
+    return errors
   }
 
   // Splits the number in hundreds, since this has the same setup the whole time
@@ -22,16 +22,6 @@ export function transformNumberToWord(numberInput: number, language: string): st
     totalWord += getTotalWord(numb, library, language) + library.endWords[lengthOfNumbers - index as keyof EndWords];
   })
   return totalWord;
-}
-
-function containsNoneNumber(numberInput: number) {
-  const regex = /([^-1234567890])/g
-  return numberInput.toString().match(regex)
-}
-
-// Check if it's in the bounds set in the library
-function outsideBoundaries(library: NumberToLanguage, numberInput: number) {
-  return numberInput < library.min || numberInput >= library.ceiling
 }
 
 function splitNumber(numberInput: number): string[] {
