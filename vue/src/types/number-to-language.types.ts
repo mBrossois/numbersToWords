@@ -2,12 +2,15 @@
 export interface NumberToLanguage {
   // Order decides the order the number is supposed to translate in D = digit, T = ten, H = hundred, c = connector
   order: string
+  // The EndWords are the words that come after hundreds, like thousand and million
   endWords: EndWords
   D: Digit
   T: Digit
   H: Digit
+  // The ceiling and minimum number that are supported right now
   ceiling: number
   min: number
+  // The exceptions are the numbers that follow there own logic
   exceptions: {[key: string]: string}
 }
 

@@ -11,7 +11,7 @@ export function transformNumberToWord(numberInput: number, language: string): st
     return errors
   }
 
-  // Splits the number in hundreds, since this has the same setup the whole time
+  // Splitting it in hundreds
   const splitNumb = splitNumber(numberInput);
   const lengthOfNumbers = splitNumb.length - 1;
 
@@ -24,6 +24,7 @@ export function transformNumberToWord(numberInput: number, language: string): st
   return totalWord;
 }
 
+// Splits the number in hundreds like [102, 301], a hundred always act the same
 function splitNumber(numberInput: number): string[] {
   // Transform to string to use length
   const numberToString = numberInput.toString();
@@ -56,6 +57,7 @@ function fillWithZero(amountOfZero: number): string {
   return zeroAmount;
 }
 
+// This translate an amount of 3 numbers to text
 function getTotalWord(numb: string, library: NumberToLanguage, language: string): string {
   let word = '';
   // Counter for calculating the pos of the number, since order is longer then that
