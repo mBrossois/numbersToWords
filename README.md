@@ -1,18 +1,16 @@
 # Numbers To Words
-A simple application, where you can select the language you 
-want the number to be translated to and an input field
-to enter the number in!
+A simple application, that allows you to translate
+numbers to text!
 
-## Starting the application
-This application is build with Vue3 and Node.
-### Requirements
-You need to have `Node` and `npm` installed.
+The implementation supports full numbers for the 
+following languages: 
+`NL`
+`EN`
 
-### Installation
-Before we can start the application, we need to have the 
-packages installed, navigate to `/vue` and run `npm i`.
+This comes with a webpage setup, where you can switch
+between the languages and enter the number that you
+want to translate to text!
 
-### Running the application
-After installing, we stay in `/vue`, run `npm run serve`
-to run the application and go open a web browser on 
-`localhost:8080`
+## Technical implementation
+For the technical requirements and running the code,
+read the `README` in the vue folder.

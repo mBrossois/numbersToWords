@@ -1,17 +1,17 @@
 import {connectWords, numberLanguageLibrary, orderToAmount} from "@/utils/number-language.library";
 import {Digit, EndWords, NumberToLanguage} from "@/types/number-to-language.types";
+import {getErrors} from "@/utils/errors.utils";
 
 export function transformNumberToWord(numberInput: number, language: string): string {
   // Get library based on language and see if the value is zero
   const library = numberLanguageLibrary(numberInput === 0)[language]
 
-  if(outsideBoundaries(library, numberInput)) {
-    return `Out of bounds, try to add a number that's bigger or equal to ${library.min} and smaller then ${library.ceiling}`
-  } else if(containsNoneNumber(numberInput)) {
-    return 'Only full numbers can be translated'
+  const errors = getErrors(numberInput, library)
+  if(errors) {
+    return errors
   }
 
-  // Splits the number in hundreds, since this has the same setup the whole time
+  // Splitting it in hundreds
   const splitNumb = splitNumber(numberInput);
   const lengthOfNumbers = splitNumb.length - 1;
 
@@ -24,16 +24,7 @@ export function transformNumberToWord(numberInput: number, language: string): st
   return totalWord;
 }
 
-function containsNoneNumber(numberInput: number) {
-  const regex = /([^-1234567890])/g
-  return numberInput.toString().match(regex)
-}
-
-// Check if it's in the bounds set in the library
-function outsideBoundaries(library: NumberToLanguage, numberInput: number) {
-  return numberInput < library.min || numberInput >= library.ceiling
-}
-
+// Splits the number in hundreds like [102, 301], a hundred always act the same
 function splitNumber(numberInput: number): string[] {
   // Transform to string to use length
   const numberToString = numberInput.toString();
@@ -66,6 +57,7 @@ function fillWithZero(amountOfZero: number): string {
   return zeroAmount;
 }
 
+// This translate an amount of 3 numbers to text
 function getTotalWord(numb: string, library: NumberToLanguage, language: string): string {
   let word = '';
   // Counter for calculating the pos of the number, since order is longer then that
